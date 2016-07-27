@@ -1,0 +1,107 @@
+
+<article>
+	<section ng-repeat="new in news">
+		<a ng-href="{{new.url}}">
+			<!--title 简述-->
+			<p>{{new.title}}</p>
+			<img ng-src="{{new.picUrl}}">
+			<!--文章来源，评论，发表时间-->
+			<p class="content">
+				{{new.description}}
+			</p>
+			<p>
+				<span>中国西藏网</span>
+				<span>评论</span>
+				<span>827</span>
+				<span>18分钟前</span>
+			</p>
+		</a>
+	</section>
+	<!--懒加载-->
+	<div class="loadMore" ng-click="loadMore()">
+		<p>查看更多。。。。</p>
+	</div>
+</article>
+<!--loading 加载-->
+<div class="loading" ng-show="loading1"><img src="img/01.jpg"></div>
+<style>
+	.loadMore p {
+		position: absolute;
+		bottom:-150px;
+		left: 0;
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		color: gray;
+	}
+	
+	.loading {
+		position:fixed;
+		z-index: 5;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		background: rgba(0, 0, 0, .5)
+	}
+	
+	.loading img {
+		height:20px;
+		width:20px;
+		position: fixed;
+		left: 45%;
+		top: 50%;
+		animation: mymove 1s infinite;
+		animation-timing-function: linear;
+		animation-direction: normal;
+	}
+	
+	@keyframes mymove {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	article {
+		position: relative;
+	}
+	
+	article section {
+		height: 150px;
+		position: relative;
+		top:85px;
+		left: 0;
+	}
+	
+	article section p {
+		margin: 10px 10px 0 10px;
+	}
+	
+	article section a {
+		text-decoration: none;
+		color: black;
+	}
+	
+	article section img {
+		/*text-align: center;*/
+		margin-top: 10px;
+		margin-left: 10px;
+		height: 80px;
+	}
+	
+	article section span {
+		font-size: 10px;
+		color: #999;
+	}
+	
+	.content {
+		float: right;
+		margin-right: 20px;
+		height: 72px;
+		width: 50%;
+		overflow: hidden;
+	}
+</style>
