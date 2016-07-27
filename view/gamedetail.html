@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+	.header{
+		height: 30px;
+		line-height: 30px;
+		color: black;
+		font-size:10px;
+	}
+	.header a{
+		text-decoration: none;
+		color: black;
+		font-size:10px;
+	}
+		article{
+			margin:100px 15px 0 15px;
+			
+		}
+		section p{
+			line-height: 30px;
+		}
+		img{
+			margin-left: 10%;
+			margin-right:10%;
+			width: 80%;
+			
+		}
+	</style>
+	<body>
+		<article>
+			<h2>{{new.title}}</h2>
+			<p class="header"><span>{{new.source}}</span>&nbsp;&nbsp;&nbsp;<span>{{new.pubDate}}</span>&nbsp;&nbsp;&nbsp;<a href="{{new.link}}"><span>查看原文</span></a></p>
+			<img ng-src="{{new.imageurls[0].url?new.imageurls[0].url:'img/01.jpg'}}">
+			<section>
+				<p>{{new.desc}}</p>
+			</section>
+		</article>
+	</body>
+</html>

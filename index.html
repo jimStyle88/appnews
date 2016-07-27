@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="wsscat">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>移动端版 日日头条</title>
+		<link rel="stylesheet" type="text/css" href="dist/bass.css" />
+		<script type="text/javascript" src="dist/angular.js"></script>
+		<script type="text/javascript" src="dist/angular-route.js"></script>
+		<!--angluar 中使用路由必须引入此文件-->
+		<link rel="stylesheet" href="dist/style.css" />
+	</head>
+
+	<body>
+		<!--布置环境，之后设置的所有模板都放在这个容器里设置方法：ng-view=""-->
+		<div ng-view=""></div>
+	</body>
+	<script>
+		/*渲染视图*/
+		var app = angular.module('wsscat', ['ngRoute']); //设置路由的方法，必须要在【】里固定写法['ngRoute']
+		app.config(function($routeProvider) { //路由的固定写法，
+				$routeProvider.when('/index', { //'/index' 路由的名称，当路由为index 的时候，启动indexCtrl控制器，并自动跳转到view/index1.html;
+						controller: 'indexCtrl',
+						templateUrl: 'view/index1.html'
+					})
+					//如果找不到对应的路由，那么就直接跳到index，模板文件
+					.otherwise({
+						redirectTo: '/index'
+					})
+			})
+			//定义一个控制器
+		app.controller('indexCtrl', ['$scope', '$http', function($scope, $http) {
+			$scope.offset =10;//offset
+			//数据没请求回来时，出现一个loading;
+			$scope.loading1=true;
+			//alert(1)
+			var loadMoreData = function(o) {
+				$scope.loading1=true;
+				//'http://10.16.151.25/news/baiduApi2.php'
+				$http.get('view/baiduApi1.php', {
+					params: {
+						num:o,
+						page:1,
+					}
+				}).success(function(data) {
+					//数据请求成功后，loading切换回true
+					$scope.loading1=false;
+					//alert(1)
+					console.log(data)
+						//请求并返回数据；
+					$scope.news = data.newslist;
+					console.log($scope.news);
+				})
+			}
+
+			loadMoreData($scope.offset);
+			$scope.loadMore = function() {
+				$scope.loading1=true;
+				alert(1)
+				//自定义偏移量，点击查看更多增加的条数；
+				//alert(1)
+				$scope.offset+=5;
+				loadMoreData($scope.offset);
+			}
+		}])
+	</script>
+
+</html>
